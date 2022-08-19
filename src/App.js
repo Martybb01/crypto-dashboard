@@ -1,5 +1,4 @@
 import "./App.css";
-import { Datatable } from "./components/Datatable";
 import { Link, Route, Routes } from "react-router-dom";
 import Assets from "./pages/Assets";
 import Markets from "./pages/Markets";

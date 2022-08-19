@@ -1,5 +1,12 @@
 import React from "react";
+import Table from "../components/Table";
 
-export function Assets() {
-  return <div></div>;
+function Assets() {
+  return (
+    <div>
+      <Table />
+    </div>
+  );
 }
+
+export default Assets;

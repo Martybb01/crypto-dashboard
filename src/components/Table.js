@@ -5,21 +5,27 @@ import { useFetchApi } from "./useFetchApi";
 function Table() {
   // const { symbol, tickersChange, tickersPrice, loading, error, onFetchApi } =
   //   useFetchApi();
-  const { data, loading, error, onFetchApi } = useFetchApi();
+  // const { data, loading, error, onFetchApi } = useFetchApi();
+  const { info, infoError, loadingInfo, onRefresh } = useFetchApi();
+  const { price, priceError, loadingPrice } = useFetchApi();
+  const { change, changeError, loadingChange } = useFetchApi();
+
+  // const cloneInfo = Object.assign([], info.symbols);
+  // console.log(cloneInfo);
 
   const columns = [
     {
       name: "Nome mercato",
-      selector: (row) => row.symbols.symbol,
+      selector: (row) => row.symbol,
       sortable: true,
     },
     {
       name: "Base Asset",
-      selector: (row) => row.symbols.baseAsset,
+      selector: (row) => row.baseAsset,
     },
     {
       name: "Quote Asset",
-      selector: (row) => row.symbols.quoteAsset,
+      selector: (row) => row.quoteAsset,
     },
     {
       name: "Prezzo",
@@ -32,7 +38,7 @@ function Table() {
     },
   ];
 
-  const data2 = [
+  const data = [
     {
       symbol: 1,
       baseAsset: "ciao",
@@ -52,16 +58,17 @@ function Table() {
       baseAsset: "ciao",
       quoteAsset: "1988",
       price: 1000,
-      priceChangePercent: "45%",
+      priceChangePercent: "20%",
     },
   ];
 
   return (
-    <div className="table-container" onChange={onFetchApi}>
+    <div className="table-container">
       <h3>Material table</h3>
-      {loading && <h1>Loading...</h1>}
-      {error && <h1>An error has occured</h1>}
-      {data && <h1>{data}</h1>}
+      <button onClick={onRefresh}>Refresh</button>
+      {loadingInfo && <h1>Loading...</h1>}
+      {infoError && <h1>An error has occured</h1>}
+      {info && <h1>{info}</h1>}
       <DataTable title="Crypto data" data={data} columns={columns} />
     </div>
   );

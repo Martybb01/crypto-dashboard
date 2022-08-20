@@ -13,6 +13,8 @@ import React from "react";
 
 // export default Markets;
 
+// pagina esempio da non considerare
+
 const binancePublicEndpoint = "https://api.binance.com";
 const exchangeInfoEndpoint = binancePublicEndpoint + "/api/v3/exchangeInfo";
 const tickersEndpoint = binancePublicEndpoint + "/api/v3/ticker/price";

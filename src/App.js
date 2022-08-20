@@ -10,7 +10,7 @@ export function App() {
         <Link to="markets">Markets</Link> | <Link to="assets">Assets</Link>
       </div>
       <Routes>
-        <Route path="/" element={<Assets />} />
+        <Route path="/" element={<Markets />} />
         <Route path="/markets" element={<Markets />} />
         <Route path="/assets" element={<Assets />} />
         <Route

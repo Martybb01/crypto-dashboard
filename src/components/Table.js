@@ -66,6 +66,7 @@ function Table() {
     <div className="table-container">
       <h3>Material table</h3>
       <button onClick={onRefresh}>Refresh</button>
+      {console.log(onRefresh)}
       {loadingInfo && <h1>Loading...</h1>}
       {infoError && <h1>An error has occured</h1>}
       {info && <h1>{info}</h1>}

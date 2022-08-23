@@ -27,40 +27,35 @@ const columns = [
 ];
 
 function Assets() {
-  const { symbol } = useFetchApi();
+  const { symbol, loading, error } = useFetchApi();
   const { tickersPrice } = useFetchApi();
   // const { info, infoError, loadingInfo, onRefresh } = useFetchApi();
   // const { price, priceError, loadingPrice } = useFetchApi();
   const [search, setSearch] = useState("");
-  const [data, setData] = useState([]);
+  const crypto = symbol.concat(tickersPrice);
+  const [data, setData] = useState([...crypto]);
 
-  // console.log(symbol);
-  let crypto = symbol.concat(tickersPrice);
-  console.log(crypto);
-  console.log(tickersPrice);
+  // const newConcatData = crypto.find(() => {
+  //   if (symbol.symbol === tickersPrice.symbol) {
+  //     const newData
+  //   }
+  // });
+  let priceMap = tickersPrice.reduce((acc, curr) => {
+    acc[curr.symbol] = curr;
+    return acc;
+  }, {});
+  let combined = symbol.map((sign) =>
+    Object.assign(sign, priceMap[sign.symbol])
+  );
+  console.log(combined);
 
-  // const symbols = info?.symbols;
+  console.log(data);
 
   const coins = symbol?.filter((coin) =>
     coin.symbol?.toLowerCase().includes(search.toLowerCase())
   );
-
-  // useEffect(() => {
-  //   const priceMerger = (s) => {
-  //     const priceFound = tickersPrice.find((p) => s === p.symbol);
-  //     return (
-  //       priceFound && {
-  //         price: priceFound.price,
-  //       }
-  //     );
-  //   };
-  //   if (symbol && tickersPrice) {
-  //     const marketMap = symbol.map(
-  //       (symbol) => (symbol = { ...symbol, ...priceMerger(symbol.symbol) })
-  //     );
-  //     setData(marketMap);
-  //   }
-  // }, [symbol, tickersPrice]);
+  // setData(symbol);
+  // console.log(symbol);
 
   // const formatData = (symbols, prices) => {
   //   symbols.map((symbol, index) => {
@@ -98,6 +93,8 @@ function Assets() {
   return (
     <div className="App">
       <form>
+        {loading && <h3>Loading...</h3>}
+        {error && <h3>An error has occurred</h3>}
         <input
           type="text"
           placeholder="search a crypto"
@@ -113,8 +110,9 @@ function Assets() {
 
         //   return symbolTicker;
         // })}
-        data={coins}
+        data={combined}
         pagination
+        expandableRows
       />
     </div>
   );

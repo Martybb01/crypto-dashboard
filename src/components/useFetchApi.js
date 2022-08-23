@@ -9,7 +9,7 @@ const tickers24hchange = binancePublicEndpoint + "/api/v3/ticker/24hr";
 
 export function useFetchApi(endpoint) {
   const [symbol, setSymbol] = useState([]);
-  const [tickersPrice, setTickersPrice] = useState({});
+  const [tickersPrice, setTickersPrice] = useState([]);
   const [tickersChange, setTickersChange] = useState([]);
 
   const [loading, setLoading] = useState(null);

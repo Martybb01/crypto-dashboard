@@ -29,17 +29,10 @@ const columns = [
 function Assets() {
   const { symbol, loading, error } = useFetchApi();
   const { tickersPrice } = useFetchApi();
-  // const { info, infoError, loadingInfo, onRefresh } = useFetchApi();
-  // const { price, priceError, loadingPrice } = useFetchApi();
   const [search, setSearch] = useState("");
-  const crypto = symbol.concat(tickersPrice);
-  const [data, setData] = useState([...crypto]);
+  // const crypto = symbol.concat(tickersPrice);
+  // const [data, setData] = useState([...crypto]);
 
-  // const newConcatData = crypto.find(() => {
-  //   if (symbol.symbol === tickersPrice.symbol) {
-  //     const newData
-  //   }
-  // });
   let priceMap = tickersPrice.reduce((acc, curr) => {
     acc[curr.symbol] = curr;
     return acc;
@@ -47,15 +40,11 @@ function Assets() {
   let combined = symbol.map((sign) =>
     Object.assign(sign, priceMap[sign.symbol])
   );
-  console.log(combined);
 
-  console.log(data);
-
-  const coins = symbol?.filter((coin) =>
+  const data = combined?.filter((coin) =>
     coin.symbol?.toLowerCase().includes(search.toLowerCase())
   );
-  // setData(symbol);
-  // console.log(symbol);
+  console.log(data);
 
   // const formatData = (symbols, prices) => {
   //   symbols.map((symbol, index) => {
@@ -85,11 +74,6 @@ function Assets() {
     setSearch(e.target.value);
   };
 
-  // const data = symbols.map((item) => {
-  //   const symbolTicker = price.find((ticker) => ticker.symbol == item.symbol )
-  //   return symbolTicker
-  // })
-
   return (
     <div className="App">
       <form>
@@ -101,19 +85,7 @@ function Assets() {
           onChange={handleChange}
         ></input>
       </form>
-      <DataTable
-        columns={columns}
-        // data={symbols.map((item) => {
-        //   const symbolTicker = price.find(
-        //     (ticker) => ticker.symbol === item.symbol
-        //   );
-
-        //   return symbolTicker;
-        // })}
-        data={combined}
-        pagination
-        expandableRows
-      />
+      <DataTable columns={columns} data={data} pagination expandableRows />
     </div>
   );
 }

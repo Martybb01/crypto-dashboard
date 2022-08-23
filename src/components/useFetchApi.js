@@ -23,22 +23,18 @@ export function useFetchApi(endpoint) {
         method: "GET",
       });
       const exchangeInfoJson = await exchangeInfo.data;
-      // console.log(exchangeInfoJson);
 
       const tickersPrice = await axios(tickersEndpoint, { method: "GET" });
       const tickersPriceJson = await tickersPrice.data;
-      // console.log(tickersPriceJson);
 
       const tickersChange = await axios(tickers24hchange, { method: "GET" });
       const tickersChangeJson = await tickersChange.data;
-      // console.log(tickersChangeJson);
 
       setSymbol(exchangeInfoJson?.symbols);
 
       setTickersPrice(tickersPriceJson);
 
       setTickersChange(tickersChangeJson);
-      // console.log(tickersPrice);
     } catch (error) {
       setError(error);
       console.log(error);

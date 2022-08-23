@@ -7,90 +7,85 @@ const exchangeInfoEndpoint = binancePublicEndpoint + "/api/v3/exchangeInfo";
 const tickersEndpoint = binancePublicEndpoint + "/api/v3/ticker/price";
 const tickers24hchange = binancePublicEndpoint + "/api/v3/ticker/24hr";
 
-// export function useFetchApi() {
-//   // const [symbol, setSymbol] = useState([]);
-//   // const [tickersPrice, setTickersPrice] = useState([]);
-//   // const [tickersChange, setTickersChange] = useState([]);
-//   const [data, setData] = useState({
-//     info: [],
-//     price: [],
-//     change: [],
-//   });
-//   const [loading, setLoading] = useState(null);
-//   const [error, setError] = useState(null);
+export function useFetchApi(endpoint) {
+  const [symbol, setSymbol] = useState([]);
+  const [tickersPrice, setTickersPrice] = useState({});
+  const [tickersChange, setTickersChange] = useState([]);
 
-//   async function fetchApi() {
-//     setLoading(true);
-//     setError(false);
-//     try {
-//       const exchangeInfo = await axios(exchangeInfoEndpoint, {
-//         method: "GET",
-//       });
-//       // const exchangeInfoJson = await exchangeInfo.json();
-//       // console.log(exchangeInfoJson);
+  const [loading, setLoading] = useState(null);
+  const [error, setError] = useState(null);
 
-//       const tickersPrice = await axios(tickersEndpoint, { method: "GET" });
-//       // const tickersPriceJson = await tickersPrice.json();
-//       // console.log(tickersPriceJson);
+  async function fetchApi() {
+    setLoading(true);
+    setError(false);
+    try {
+      const exchangeInfo = await axios(exchangeInfoEndpoint, {
+        method: "GET",
+      });
+      const exchangeInfoJson = await exchangeInfo.data;
+      // console.log(exchangeInfoJson);
 
-//       const tickersChange = await axios(tickers24hchange, { method: "GET" });
-//       // const tickersChangeJson = await tickersChange.json();
-//       // console.log(tickersChangeJson);
-//       setData({
-//         info: exchangeInfo,
-//         price: tickersPrice,
-//         change: tickersChange,
-//       });
-//       // setSymbol(exchangeInfoJson.symbols);
-//       // setTickersPrice(tickersPriceJson);
-//       // setTickersChange(tickersChangeJson);
-//       // setData({ exchangeInfoJson, tickersChangeJson, tickersPriceJson });
-//     } catch (error) {
-//       setError(error);
-//       console.log(error);
-//       // setSymbol([]);
-//       // setTickersChange([]);
-//       // setTickersPrice([]);
-//       setData([]);
-//     } finally {
-//       setLoading(false);
-//     }
-//   }
+      const tickersPrice = await axios(tickersEndpoint, { method: "GET" });
+      const tickersPriceJson = await tickersPrice.data;
+      // console.log(tickersPriceJson);
 
-//   useEffect(() => {
-//     fetchApi();
-//   }, []);
+      const tickersChange = await axios(tickers24hchange, { method: "GET" });
+      const tickersChangeJson = await tickersChange.data;
+      // console.log(tickersChangeJson);
 
-//   return {
-//     data,
-//     loading,
-//     error,
-//     onFetchApi: fetchApi,
-//   };
-// }
+      setSymbol(exchangeInfoJson?.symbols);
 
-export function useFetchApi() {
-  const { data: info, error: infoError, mutate } = useSWR(exchangeInfoEndpoint);
-  const { data: price, error: priceError } = useSWR(tickersEndpoint);
-  const { data: change24h, error: changeError } = useSWR(tickers24hchange);
+      setTickersPrice(tickersPriceJson);
 
-  function handleRefresh() {
-    mutate();
+      setTickersChange(tickersChangeJson);
+      // console.log(tickersPrice);
+    } catch (error) {
+      setError(error);
+      console.log(error);
+      setSymbol([]);
+      setTickersChange([]);
+      setTickersPrice([]);
+    } finally {
+      setLoading(false);
+    }
   }
 
+  useEffect(() => {
+    fetchApi();
+  }, []);
+
   return {
-    info,
-    price,
-    change24h,
-    infoError,
-    priceError,
-    changeError,
-    loadingInfo: !info && !infoError,
-    loadingPrice: !price && !priceError,
-    loadingChange: !change24h && !changeError,
-    onRefresh: handleRefresh,
+    symbol,
+    tickersPrice,
+    tickersChange,
+    loading,
+    error,
+    onFetchApi: fetchApi,
   };
 }
+
+// export function useFetchApi() {
+//   const { data: info, error: infoError, mutate } = useSWR(exchangeInfoEndpoint);
+//   const { data: price, error: priceError } = useSWR(tickersEndpoint);
+//   const { data: change24h, error: changeError } = useSWR(tickers24hchange);
+
+//   function handleRefresh() {
+//     mutate();
+//   }
+
+//   return {
+//     info,
+//     price,
+//     change24h,
+//     infoError,
+//     priceError,
+//     changeError,
+//     loadingInfo: !info && !infoError,
+//     loadingPrice: !price && !priceError,
+//     loadingChange: !change24h && !changeError,
+//     onRefresh: handleRefresh,
+//   };
+// }
 
 // export function useFetchApi(binancePublicEndpoint) {
 //   const { data: info, error } = useSWR(exchangeInfoEndpoint);

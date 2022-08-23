@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useFetchApi } from "../components/useFetchApi";
 import DataTable from "react-data-table-component";
 
+const binancePublicEndpoint = "https://api.binance.com";
+const exchangeInfoEndpoint = binancePublicEndpoint + "/api/v3/exchangeInfo";
+
 const columns = [
   {
     name: "Nome Mercato",
@@ -19,44 +22,69 @@ const columns = [
   {
     name: "Prezzo",
     selector: (row) => row.price,
+    sortable: true,
   },
 ];
 
 function Assets() {
-  const { info, infoError, loadingInfo, onRefresh } = useFetchApi();
-  const { price, priceError, loadingPrice } = useFetchApi();
+  const { symbol } = useFetchApi();
+  const { tickersPrice } = useFetchApi();
+  // const { info, infoError, loadingInfo, onRefresh } = useFetchApi();
+  // const { price, priceError, loadingPrice } = useFetchApi();
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
-  // console.log(info);
-  // console.log(price);
 
-  const symbols = info?.symbols;
+  // console.log(symbol);
+  let crypto = symbol.concat(tickersPrice);
+  console.log(crypto);
+  console.log(tickersPrice);
 
-  const coins = symbols?.filter((coin) =>
+  // const symbols = info?.symbols;
+
+  const coins = symbol?.filter((coin) =>
     coin.symbol?.toLowerCase().includes(search.toLowerCase())
   );
 
-  const formatData = (symbols, prices) => {
-    symbols.map((symbol, index) => {
-      const price = prices.find((price) => price.symbol === symbol.symbol);
-      return {
-        ...symbol,
-        id: index,
-        symbolQuote: price.price,
-      };
-    });
-  };
+  // useEffect(() => {
+  //   const priceMerger = (s) => {
+  //     const priceFound = tickersPrice.find((p) => s === p.symbol);
+  //     return (
+  //       priceFound && {
+  //         price: priceFound.price,
+  //       }
+  //     );
+  //   };
+  //   if (symbol && tickersPrice) {
+  //     const marketMap = symbol.map(
+  //       (symbol) => (symbol = { ...symbol, ...priceMerger(symbol.symbol) })
+  //     );
+  //     setData(marketMap);
+  //   }
+  // }, [symbol, tickersPrice]);
 
-  useEffect(() => {
-    if (info && price) {
-      const _DATAS = formatData(info?.symbols, price);
-      setData(_DATAS);
-    }
-  }, [info, price]);
+  // const formatData = (symbols, prices) => {
+  //   symbols.map((symbol, index) => {
+  //     const symbolTicker = prices.find(
+  //       (price) => price.symbol === symbol.symbol
+  //     );
+  //     return {
+  //       ...symbols,
+  //       id: index,
+  //       symbolQuote: symbolTicker?.price,
+  //     };
+  //   });
+  // };
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  // useEffect(() => {
+  //   if (symbol && tickersPrice) {
+  //     const _DATAS = formatData(coins, tickersPrice);
+  //     setData(_DATAS);
+  //   }
+  // }, [coins, symbol, tickersPrice]);
+
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
 
   const handleChange = (e) => {
     setSearch(e.target.value);

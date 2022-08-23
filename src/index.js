@@ -17,8 +17,14 @@ root.render(
       <React.StrictMode>
         {/* <App /> */}
         <div>
-          <div>
-            <Link to="markets">Markets</Link> | <Link to="assets">Assets</Link>
+          <div className="link-style">
+            <Link to="markets" className="link-style">
+              Markets
+            </Link>{" "}
+            |{" "}
+            <Link to="assets" className="link-style">
+              Assets
+            </Link>
           </div>
           <Routes>
             <Route path="/" element={<Markets />} />

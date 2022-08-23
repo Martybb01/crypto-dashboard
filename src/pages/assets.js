@@ -12,11 +12,11 @@ const columns = [
     sortable: true,
   },
   {
-    name: "BaseAsset",
+    name: "Base Asset",
     selector: (row) => row.baseAsset,
   },
   {
-    name: "QuoteAsset",
+    name: "Quote Asset",
     selector: (row) => row.quoteAsset,
   },
   {
@@ -75,17 +75,21 @@ function Assets() {
   };
 
   return (
-    <div className="App">
-      <form>
-        {loading && <h3>Loading...</h3>}
-        {error && <h3>An error has occurred</h3>}
-        <input
-          type="text"
-          placeholder="search a crypto"
-          onChange={handleChange}
-        ></input>
-      </form>
-      <DataTable columns={columns} data={data} pagination expandableRows />
+    <div className="app-container">
+      <div className="coin-search">
+        <h1 className="coin-text">Search a crypto Pair</h1>
+        <form>
+          {loading && <h3>Loading...</h3>}
+          {error && <h3>An error has occurred</h3>}
+          <input
+            type="text"
+            placeholder="search..."
+            onChange={handleChange}
+            className="coin-input"
+          ></input>
+        </form>
+      </div>
+      <DataTable columns={columns} data={data} className="table" pagination />
     </div>
   );
 }

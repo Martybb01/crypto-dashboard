@@ -3,9 +3,6 @@ import { useFetchApi } from "../customHook/useFetchApi";
 import DataTable from "react-data-table-component";
 import { useSearchParams } from "react-router-dom";
 
-const binancePublicEndpoint = "https://api.binance.com";
-const exchangeInfoEndpoint = binancePublicEndpoint + "/api/v3/exchangeInfo";
-
 const columns = [
   {
     name: "Nome Mercato",
@@ -32,6 +29,9 @@ function Markets() {
   const { tickersPrice } = useFetchApi();
   const [search, setSearch] = useState("");
 
+  const [searchParams] = useSearchParams();
+  const filterBaseAsset = searchParams.get("base_assets");
+
   let priceMap = tickersPrice.reduce((acc, curr) => {
     acc[curr.symbol] = curr;
 
@@ -41,9 +41,13 @@ function Markets() {
     Object.assign(sign, priceMap[sign.symbol])
   );
 
-  const data = combined?.filter((coin) =>
+  let data = combined?.filter((coin) =>
     coin.symbol?.toLowerCase().includes(search.toLowerCase())
   );
+
+  if (filterBaseAsset) {
+    data = data.filter((data) => data.baseAsset === filterBaseAsset);
+  }
 
   // const formatData = (symbols, prices) => {
   //   symbols.map((symbol, index) => {

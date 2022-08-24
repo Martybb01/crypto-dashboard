@@ -50,6 +50,7 @@ function Assets() {
         data={data}
         pagination
         noDataComponent={<h3>Loading Data</h3>}
+        responsive
       />
     </div>
   );

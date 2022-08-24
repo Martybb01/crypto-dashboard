@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useFetchApi } from "../customHook/useFetchApi";
 import DataTable from "react-data-table-component";
 import { useSearchParams } from "react-router-dom";
@@ -27,6 +27,7 @@ const columns = [
 function Markets() {
   const { symbol, loading, error } = useFetchApi();
   const { tickersPrice } = useFetchApi();
+
   const [search, setSearch] = useState("");
 
   const [searchParams] = useSearchParams();
@@ -98,6 +99,7 @@ function Markets() {
         className="table"
         pagination
         noDataComponent={<h3>Loading Data</h3>}
+        responsive
       />
     </div>
   );

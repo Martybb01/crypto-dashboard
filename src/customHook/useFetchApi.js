@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import useSWR from "swr";
 
 const binancePublicEndpoint = "https://api.binance.com";
 const exchangeInfoEndpoint = binancePublicEndpoint + "/api/v3/exchangeInfo";

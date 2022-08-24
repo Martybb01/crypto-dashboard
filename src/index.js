@@ -14,7 +14,6 @@ root.render(
           <Link to="/markets" className="link-style">
             Markets
           </Link>{" "}
-          |{" "}
           <Link to="/assets" className="link-style">
             Assets
           </Link>

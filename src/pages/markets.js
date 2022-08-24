@@ -1,81 +1,57 @@
-// import React from "react";
-// import Table from "../components/Table";
+import React, { useEffect, useState } from "react";
+import { useFetchApi } from "../customHook/useFetchApi";
+import DataTable from "react-data-table-component";
+import { Link } from "react-router-dom";
 
-import React from "react";
+const columns = [
+  {
+    name: "Base Asset",
+    selector: (row) => (
+      <Link className="link-style" to={`/markets?base_assets=${row.baseAsset}`}>
+        {row.baseAsset}
+      </Link>
+    ),
+  },
+  {
+    name: "Markets",
+    selector: (row) => row.markets,
+    sortable: true,
+  },
+];
 
-// function Markets() {
-//   return (
-//     <div>
-//       <Table />
-//     </div>
-//   );
-// }
+function Assets() {
+  const { symbol, loading, error } = useFetchApi();
+  const [data, setData] = useState([]);
 
-// export default Markets;
+  useEffect(() => {
+    if (symbol) {
+      const baseAssetObj = symbol.reduce((acc, next) => {
+        return {
+          ...acc,
+          [next.baseAsset]: acc[next.baseAsset] + 1 || 0 || 1,
+        };
+      }, {});
 
-// pagina esempio da non considerare
+      const _data = Object.keys(baseAssetObj).map((key) => ({
+        baseAsset: key,
+        markets: baseAssetObj[key],
+      }));
 
-const binancePublicEndpoint = "https://api.binance.com";
-const exchangeInfoEndpoint = binancePublicEndpoint + "/api/v3/exchangeInfo";
-const tickersEndpoint = binancePublicEndpoint + "/api/v3/ticker/price";
+      setData(_data);
+    }
+  }, [symbol]);
 
-export default class App extends React.Component {
-  state = {
-    symbols: [],
-    tickers: [],
-  };
-
-  componentDidMount = async () => {
-    const exchangeInfo = await fetch(exchangeInfoEndpoint, {
-      method: "GET",
-    });
-    const exchangeInfoJson = await exchangeInfo.json();
-    console.log(exchangeInfoJson);
-
-    const tickers = await fetch(tickersEndpoint, { method: "GET" });
-    const tickersJson = await tickers.json();
-
-    this.setState({
-      ...this.state,
-      tickers: tickersJson,
-      symbols: exchangeInfoJson.symbols,
-    });
-  };
-
-  render() {
-    return (
-      <div class="card-container">
-        {this.state.symbols.slice(0, 20).map((item, key) => {
-          const symbolTicker = this.state.tickers.find(
-            (ticker) => ticker.symbol === item.symbol
-          );
-          return (
-            <Card
-              symbol={item.symbol}
-              baseAsset={item.baseAsset}
-              quoteAsset={item.quoteAsset}
-              price={symbolTicker?.price}
-            />
-          );
-        })}
-      </div>
-    );
-  }
+  return (
+    <div>
+      {loading && <h3>Loading...</h3>}
+      {error && <h3>An error has occurred</h3>}
+      <DataTable
+        columns={columns}
+        data={data}
+        pagination
+        noDataComponent={<h3>Loading Data</h3>}
+      />
+    </div>
+  );
 }
-
-class Card extends React.Component {
-  render() {
-    return (
-      <div className="exchangeinfo__card">
-        <div className="card-footer">
-          <p>SYMBOL: {this.props.symbol}</p>
-          <p>PRICE: {this.props.price}</p>
-        </div>
-        <div className="card-footer">
-          <p>baseAsset: {this.props.baseAsset}</p>
-          <p>quoteAsset: {this.props.quoteAsset}</p>
-        </div>
-      </div>
-    );
-  }
-}
+export default Assets;

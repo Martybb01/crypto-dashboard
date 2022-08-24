@@ -7,7 +7,7 @@ const exchangeInfoEndpoint = binancePublicEndpoint + "/api/v3/exchangeInfo";
 const tickersEndpoint = binancePublicEndpoint + "/api/v3/ticker/price";
 const tickers24hchange = binancePublicEndpoint + "/api/v3/ticker/24hr";
 
-export function useFetchApi(endpoint) {
+export function useFetchApi() {
   const [symbol, setSymbol] = useState([]);
   const [tickersPrice, setTickersPrice] = useState([]);
   const [tickersChange, setTickersChange] = useState([]);
@@ -80,34 +80,5 @@ export function useFetchApi(endpoint) {
 //     loadingPrice: !price && !priceError,
 //     loadingChange: !change24h && !changeError,
 //     onRefresh: handleRefresh,
-//   };
-// }
-
-// export function useFetchApi(binancePublicEndpoint) {
-//   const { data: info, error } = useSWR(exchangeInfoEndpoint);
-
-//   return {
-//     info,
-//     error,
-//     isLoading: !info && !error,
-//   };
-// }
-
-// export function useFetchApi2(binancePublicEndpoint) {
-//   const { data: price, error } = useSWR(tickersEndpoint);
-
-//   return {
-//     price,
-//     error,
-//     isLoading: !price && !error,
-//   };
-// }
-
-// export function useFetchApi3(binancePublicEndpoint) {
-//   const { data: change, error } = useSWR(tickers24hchange);
-//   return {
-//     change,
-//     error,
-//     isLoading: !change && !error,
 //   };
 // }

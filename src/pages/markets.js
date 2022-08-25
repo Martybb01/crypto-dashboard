@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router-dom";
 
 const columns = [
   {
-    name: "Nome Mercato",
+    name: "Market",
     selector: (row) => row.symbol,
     sortable: true,
   },
@@ -18,17 +18,23 @@ const columns = [
     selector: (row) => row.quoteAsset,
   },
   {
-    name: "Prezzo",
+    name: "Price",
     selector: (row) => row.price,
     sortable: true,
   },
+  // {
+  //   name: "24h change",
+  //   selector: (row) => row.priceChangePercent,
+  //   sortable: true,
+  // },
 ];
 
 function Markets() {
   const { symbol, loading, error } = useFetchApi();
   const { tickersPrice } = useFetchApi();
-
+  // const { tickersChange } = useFetchApi();
   const [search, setSearch] = useState("");
+  // const [cripto, setCripto] = useState([]);
 
   const [searchParams] = useSearchParams();
   const filterBaseAsset = searchParams.get("base_assets");
@@ -38,6 +44,26 @@ function Markets() {
 
     return acc;
   }, {});
+
+  // let changeMap = tickersChange.reduce((acc, curr) => {
+  //   acc[curr.symbol] = curr;
+
+  //   return acc;
+  // }, {});
+
+  // const bothObj = Object.assign(priceMap, changeMap);
+  // console.log(bothObj);
+
+  // const both = Object.keys(bothObj).map((key) => [Number(key), bothObj[key]]);
+  // console.log(both);
+
+  // useEffect(() => {
+  //   setCripto((changeMap) => {
+  //     return { ...changeMap, ...priceMap };
+  //   });
+  // }, []);
+  // console.log(cripto);
+
   let combined = symbol.map((sign) =>
     Object.assign(sign, priceMap[sign.symbol])
   );
@@ -49,30 +75,6 @@ function Markets() {
   if (filterBaseAsset) {
     data = data.filter((data) => data.baseAsset === filterBaseAsset);
   }
-
-  // const formatData = (symbols, prices) => {
-  //   symbols.map((symbol, index) => {
-  //     const symbolTicker = prices.find(
-  //       (price) => price.symbol === symbol.symbol
-  //     );
-  //     return {
-  //       ...symbols,
-  //       id: index,
-  //       symbolQuote: symbolTicker?.price,
-  //     };
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   if (symbol && tickersPrice) {
-  //     const _DATAS = formatData(coins, tickersPrice);
-  //     setData(_DATAS);
-  //   }
-  // }, [coins, symbol, tickersPrice]);
-
-  // useEffect(() => {
-  //   console.log(data);
-  // }, [data]);
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -99,7 +101,6 @@ function Markets() {
         className="table"
         pagination
         noDataComponent={<h3>Loading Data</h3>}
-        responsive
       />
     </div>
   );

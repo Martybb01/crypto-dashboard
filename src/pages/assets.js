@@ -13,7 +13,7 @@ const columns = [
     ),
   },
   {
-    name: "Markets",
+    name: "Markets' Number",
     selector: (row) => row.markets,
     sortable: true,
   },
@@ -50,7 +50,6 @@ function Assets() {
         data={data}
         pagination
         noDataComponent={<h3>Loading Data</h3>}
-        responsive
       />
     </div>
   );

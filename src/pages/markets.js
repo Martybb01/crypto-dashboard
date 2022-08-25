@@ -32,9 +32,7 @@ const columns = [
 function Markets() {
   const { symbol, loading, error } = useFetchApi();
   const { tickersPrice } = useFetchApi();
-  // const { tickersChange } = useFetchApi();
   const [search, setSearch] = useState("");
-  // const [cripto, setCripto] = useState([]);
 
   const [searchParams] = useSearchParams();
   const filterBaseAsset = searchParams.get("base_assets");
@@ -44,25 +42,6 @@ function Markets() {
 
     return acc;
   }, {});
-
-  // let changeMap = tickersChange.reduce((acc, curr) => {
-  //   acc[curr.symbol] = curr;
-
-  //   return acc;
-  // }, {});
-
-  // const bothObj = Object.assign(priceMap, changeMap);
-  // console.log(bothObj);
-
-  // const both = Object.keys(bothObj).map((key) => [Number(key), bothObj[key]]);
-  // console.log(both);
-
-  // useEffect(() => {
-  //   setCripto((changeMap) => {
-  //     return { ...changeMap, ...priceMap };
-  //   });
-  // }, []);
-  // console.log(cripto);
 
   let combined = symbol.map((sign) =>
     Object.assign(sign, priceMap[sign.symbol])
@@ -106,3 +85,26 @@ function Markets() {
   );
 }
 export default Markets;
+
+//! implementazione 24hChange (da vedere perchè non viene)
+// const { tickersChange } = useFetchApi();
+// const [cripto, setCripto] = useState([]);
+
+// let changeMap = tickersChange.reduce((acc, curr) => {
+//   acc[curr.symbol] = curr;
+
+//   return acc;
+// }, {});
+
+// const bothObj = Object.assign(priceMap, changeMap);
+// console.log(bothObj);
+
+// const both = Object.keys(bothObj).map((key) => [Number(key), bothObj[key]]);
+// console.log(both);
+
+// useEffect(() => {
+//   setCripto((changeMap) => {
+//     return { ...changeMap, ...priceMap };
+//   });
+// }, []);
+// console.log(cripto);

@@ -59,6 +59,8 @@ export function useFetchApi() {
   };
 }
 
+//! Metodo con SWR per il fetch
+
 // export function useFetchApi() {
 //   const { data: info, error: infoError, mutate } = useSWR(exchangeInfoEndpoint);
 //   const { data: price, error: priceError } = useSWR(tickersEndpoint);

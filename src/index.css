@@ -58,6 +58,7 @@ body {
 .coin-text {
   margin-bottom: 20px;
   text-align: center;
+  color: #7918f2;
 }
 .coin-input {
   display: flex;

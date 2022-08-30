@@ -7,7 +7,10 @@ const columns = [
   {
     name: "Base Asset",
     selector: (row) => (
-      <Link className="link-style" to={`/markets?base_assets=${row.baseAsset}`}>
+      <Link
+        className="base-asset-style"
+        to={`/markets?base_assets=${row.baseAsset}`}
+      >
         {row.baseAsset}
       </Link>
     ),
@@ -45,6 +48,10 @@ function Assets() {
     <div>
       {loading && <h3>Loading...</h3>}
       {error && <h3>An error has occurred</h3>}
+      <p className="info-asset">
+        This is a list of all the Base Assets. Click on one of them to see only
+        the markets of the selected Asset.
+      </p>
       <DataTable
         columns={columns}
         data={data}

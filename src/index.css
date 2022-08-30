@@ -18,9 +18,11 @@ body {
 }
 .link-style:hover {
   color: #4801ff;
+  transition: all 200ms ease-in-out;
 }
 .link-style:focus {
   color: #4801ff;
+  text-decoration: underline;
 }
 .base-asset-style {
   text-decoration: none;
@@ -38,25 +40,32 @@ body {
 }
 .search-icon {
   position: relative;
-  right: 35px;
+  bottom: 35px;
+  left: 280px;
+  right: 2px;
   fill: white;
   vertical-align: middle;
+  cursor: pointer;
 }
 
 .coin-search {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 .coin-text {
-  margin-bottom: 32px;
+  margin-bottom: 20px;
   text-align: center;
 }
 .coin-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   padding-left: 16px;
-  width: 300px;
+  width: 310px;
   height: 50px;
   border-radius: 4px;
   border: none;
@@ -73,17 +82,37 @@ body {
   font-size: 15px;
   text-align: end;
 }
+.back-market-link {
+  margin-left: 15px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ac32e4;
+}
+.asset-container {
+  margin: 15px 0px 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-market-link:hover {
+  color: #4801ff;
+  transition: all 200ms ease-in-out;
+}
 .rdt_Table {
   border: 2px solid #7918f2;
   margin-top: 10px;
 }
 .rdt_TableHeadRow {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 16px;
+}
+.rdt_TableCell {
+  font-size: 14px;
 }
 .rdt_TableCol {
   background-color: #ac32e4;
-  color: aliceblue;
+  color: white;
   border-bottom: 2px solid #7918f2;
 }
 .rdt_TableRow:hover {
@@ -108,4 +137,13 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 10px 15px 10px;
+}
+.footer-content {
+  font-size: 12px;
 }

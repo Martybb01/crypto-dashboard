@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useFetchApi } from "../customHook/useFetchApi";
 import DataTable from "react-data-table-component";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const columns = [
   {
@@ -53,6 +53,23 @@ function Markets() {
 
   if (filterBaseAsset) {
     data = data.filter((data) => data.baseAsset === filterBaseAsset);
+    return (
+      <div>
+        <div className="asset-container">
+          Base Asset selected: {filterBaseAsset}
+          <Link to="/" className="back-market-link">
+            Go to all markets
+          </Link>
+        </div>
+        <DataTable
+          columns={columns}
+          data={data}
+          className="table"
+          pagination
+          noDataComponent={<h3>Loading Data</h3>}
+        />
+      </div>
+    );
   }
 
   const handleChange = (e) => {

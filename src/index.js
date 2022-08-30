@@ -54,6 +54,9 @@ root.render(
             }
           />
         </Routes>
+        <footer>
+          <p className="footer-content">Made with ❤️ | © Martina Boccuzzi</p>
+        </footer>
       </div>
     </React.StrictMode>
   </BrowserRouter>

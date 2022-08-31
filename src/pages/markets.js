@@ -56,7 +56,7 @@ function Markets() {
     return (
       <div>
         <div className="asset-container">
-          Base Asset selected: {filterBaseAsset}
+          Base Asset selected: {filterBaseAsset} ❊
           <Link to="/" className="back-market-link">
             Go to all markets
           </Link>

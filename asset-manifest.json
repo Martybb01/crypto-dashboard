@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/crypto-dashobard/static/css/main.e74f5612.css",
-    "main.js": "/crypto-dashobard/static/js/main.af6cce49.js",
-    "index.html": "/crypto-dashobard/index.html",
-    "main.e74f5612.css.map": "/crypto-dashobard/static/css/main.e74f5612.css.map",
-    "main.af6cce49.js.map": "/crypto-dashobard/static/js/main.af6cce49.js.map"
+    "main.css": "/markets/static/css/main.e74f5612.css",
+    "main.js": "/markets/static/js/main.92df7e5c.js",
+    "index.html": "/markets/index.html",
+    "main.e74f5612.css.map": "/markets/static/css/main.e74f5612.css.map",
+    "main.92df7e5c.js.map": "/markets/static/js/main.92df7e5c.js.map"
   },
   "entrypoints": [
     "static/css/main.e74f5612.css",
-    "static/js/main.af6cce49.js"
+    "static/js/main.92df7e5c.js"
   ]
 }

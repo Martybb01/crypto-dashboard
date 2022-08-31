@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/crypto-dashobard/static/css/main.e74f5612.css",
+    "main.js": "/crypto-dashobard/static/js/main.af6cce49.js",
+    "index.html": "/crypto-dashobard/index.html",
+    "main.e74f5612.css.map": "/crypto-dashobard/static/css/main.e74f5612.css.map",
+    "main.af6cce49.js.map": "/crypto-dashobard/static/js/main.af6cce49.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e74f5612.css",
+    "static/js/main.af6cce49.js"
+  ]
+}

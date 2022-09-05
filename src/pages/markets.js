@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFetchApi } from "../customHook/useFetchApi";
 import DataTable from "react-data-table-component";
 import { Link, useSearchParams } from "react-router-dom";
+import { createTheme } from "../styles/theme";
 
 const columns = [
   {
@@ -29,7 +30,7 @@ const columns = [
   // },
 ];
 
-function Markets() {
+function Markets(createTheme) {
   const { symbol, loading, error } = useFetchApi();
   const { tickersPrice } = useFetchApi();
   const [search, setSearch] = useState("");
@@ -67,6 +68,7 @@ function Markets() {
           className="table"
           pagination
           noDataComponent={<h3>Loading Data</h3>}
+          theme="violet"
         />
       </div>
     );
@@ -81,7 +83,7 @@ function Markets() {
       <div className="coin-search">
         <h1 className="coin-text">Search a Crypto Pair</h1>
         <form>
-          {loading && <h3>Loading...</h3>}
+          {loading}
           {error && <h3>An error has occurred</h3>}
           <input
             type="text"
@@ -108,6 +110,7 @@ function Markets() {
         className="table"
         pagination
         noDataComponent={<h3>Loading Data</h3>}
+        theme="violet"
       />
     </div>
   );

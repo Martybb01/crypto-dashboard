@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useFetchApi } from "../customHook/useFetchApi";
 import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
+import { createTheme } from "../styles/theme";
 
 const columns = [
   {
@@ -22,7 +23,7 @@ const columns = [
   },
 ];
 
-function Assets() {
+function Assets(createTheme) {
   const { symbol, loading, error } = useFetchApi();
   const [data, setData] = useState([]);
 
@@ -46,7 +47,7 @@ function Assets() {
 
   return (
     <div>
-      {loading && <h3>Loading...</h3>}
+      {loading}
       {error && <h3>An error has occurred</h3>}
       <p className="info-asset">
         This is a list of all the Base Assets. Click on one of them to see only
@@ -57,6 +58,7 @@ function Assets() {
         data={data}
         pagination
         noDataComponent={<h3>Loading Data</h3>}
+        theme="violet"
       />
     </div>
   );

@@ -26,19 +26,19 @@ export function useFetchApi() {
       const tickersPrice = await axios(tickersEndpoint, { method: "GET" });
       const tickersPriceJson = await tickersPrice.data;
 
-      const tickersChange = await axios(tickers24hchange, { method: "GET" });
-      const tickersChangeJson = await tickersChange.data;
+      // const tickersChange = await axios(tickers24hchange, { method: "GET" });
+      // const tickersChangeJson = await tickersChange.data;
 
       setSymbol(exchangeInfoJson?.symbols);
 
       setTickersPrice(tickersPriceJson);
 
-      setTickersChange(tickersChangeJson);
+      // setTickersChange(tickersChangeJson);
     } catch (error) {
       setError(error);
       console.log(error);
       setSymbol([]);
-      setTickersChange([]);
+      // setTickersChange([]);
       setTickersPrice([]);
     } finally {
       setLoading(false);
@@ -52,7 +52,7 @@ export function useFetchApi() {
   return {
     symbol,
     tickersPrice,
-    tickersChange,
+    // tickersChange,
     loading,
     error,
     onFetchApi: fetchApi,

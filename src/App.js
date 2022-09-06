@@ -6,10 +6,7 @@ export function App() {
   return (
     <div>
       <div className="link-style">
-        <Link
-          to="martybb01.github.io/crypto-dashboard/markets"
-          className="link-style"
-        >
+        <Link to="/crypto-dashboard/markets" className="link-style">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="22"
@@ -23,10 +20,7 @@ export function App() {
           </svg>
           Markets
         </Link>{" "}
-        <Link
-          to="martybb01.github.io/crypto-dashboard/assets"
-          className="link-style"
-        >
+        <Link to="/crypto-dashboard/assets" className="link-style">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="22"
@@ -42,18 +36,9 @@ export function App() {
         </Link>
       </div>
       <Routes>
-        <Route
-          path="martybb01.github.io/crypto-dashboard"
-          element={<Markets />}
-        />
-        <Route
-          path="martybb01.github.io/crypto-dashboard/markets"
-          element={<Markets />}
-        />
-        <Route
-          path="martybb01.github.io/crypto-dashboard/assets"
-          element={<Assets />}
-        />
+        <Route path="/crypto-dashboard" element={<Markets />} />
+        <Route path="/crypto-dashboard/markets" element={<Markets />} />
+        <Route path="/crypto-dashboard/assets" element={<Assets />} />
         <Route
           path="*"
           element={

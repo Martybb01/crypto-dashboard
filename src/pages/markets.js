@@ -58,7 +58,10 @@ function Markets(createTheme) {
       <div>
         <div className="asset-container">
           Base Asset selected: {filterBaseAsset} ❊
-          <Link to="/crypto-dashboard" className="back-market-link">
+          <Link
+            to="martybb01.github.io/crypto-dashboard"
+            className="back-market-link"
+          >
             Go to all markets
           </Link>
         </div>

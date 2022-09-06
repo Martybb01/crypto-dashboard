@@ -10,7 +10,7 @@ const columns = [
     selector: (row) => (
       <Link
         className="base-asset-style"
-        to={`/crypto-dashboard/markets?base_assets=${row.baseAsset}`}
+        to={`martybb01.github.io/crypto-dashboard/markets?base_assets=${row.baseAsset}`}
       >
         {row.baseAsset}
       </Link>
